@@ -4,6 +4,7 @@ from array import *
 # Change these two values to change the size of the board!
 BOARD_HEIGHT = 9
 BOARD_WIDTH = 9
+
 # possible x,y movements of a knight
 movements = [(-2, 1), 
             (-2, -1),
@@ -37,6 +38,7 @@ def new_board():
             tmp.append(Node(i, j))
         board.append(tmp)
     return board
+
 # Format the board to look pretty
 def print_board(board):
     for i in range(0, BOARD_HEIGHT):
@@ -44,6 +46,21 @@ def print_board(board):
             # print the coordinates without a newline
             print(f"({board[i][j].x}, {board[i][j].y}) ", end='')
         print("\n")
+
+# Test if the node is the endpoint
+def is_goal(node, end_x, end_y):
+    if node.x == end_x and node.y == end_y:
+        return True
+    return False
+
+# Print the optimal path
+def print_path(node):
+    tmp = node
+    while tmp is not None:
+        print(f'\t<-({tmp.x}, {tmp.y}) ', end=' ')
+        tmp = tmp.parent
+    print('\n')
+    return
 
 # Breadth First Search
 def search(board, start_x, start_y, end_x, end_y):
@@ -58,9 +75,10 @@ def search(board, start_x, start_y, end_x, end_y):
         
         current.visited = True
         print(f'Currently seeing {current.x}, {current.y}')
+
         # Check if we reached our destination
-        if current.x == end_x and current.y == end_y:
-            print('\tReached our destination :D')
+        if is_goal(current, end_x, end_y):
+            print_path(current)
             return 
         # Add the children of current node to frontier
         for move in movements:
