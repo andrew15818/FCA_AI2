@@ -8,8 +8,5 @@ Here, we use different searching algorithms to move a knight across a chessboard
 Given a start and an end position, we can find the optimal move for a knight, and
 then mark the nodes along the optimal path.
 
-TODO:
-- Have a better way of drawing the board on the screen after the knight arrives at the 
-destination. Include maybe the order in which the nodes are explored.
-
-
+The main idea is to compare different types of algorithms and when they would be 
+better/worse than other ones.
