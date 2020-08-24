@@ -20,6 +20,7 @@ movements = [(-2, 1),
 class Node: 
     def __init__(self, x, y):
         self.parent = None
+        self.child = None
         self.visited = False
         self.x = x
         self.y = y
@@ -45,12 +46,10 @@ def new_board():
 
 # Format the board to look pretty
 def print_board(board):
-    for i in range(0, BOARD_HEIGHT):
-        print('----------------------------------------------')
-        for j in range(0, BOARD_WIDTH):
-            # print the coordinates without a newline
-            print(f'| {board[i][j].order} ' , end=' ')
-        print("|\n")
+    for i in range(0, BOARD_WIDTH):
+        for j in range(0, BOARD_HEIGHT):
+            print(f' {board[i][j].order} |', end='')
+        print('\n---|---|---|---|---|---|---|---|---|')
 
 # Test if the node is the endpoint
 def is_goal(node, e_x, end_y):
@@ -60,13 +59,14 @@ def is_goal(node, e_x, end_y):
 
 # Print the optimal path
 def print_path(node):
-    tmp = node
-    while tmp.parent is not None:
-        print(f'<-({tmp.x}, {tmp.y}) ', end=' ')
-        tmp.order = tmp.parent.order + 1
-        tmp = tmp.parent
-    print('\n')
-    return
+
+    if node == None: 
+        print('An optimal path is: ')
+        return
+    print_path(node.parent)
+    node.order = node.parent.order + 1 if node.parent != None else 1
+    print(f'({node.x}, {node.y})->', end='')
+
 
 # Breadth First Search
 def BFS(board, s_x, s_y, e_x, end_y):
@@ -79,8 +79,11 @@ def BFS(board, s_x, s_y, e_x, end_y):
     while queue:
         # TODO: Get the oldest node in our queue (closest to the root)
         current = queue.pop(0)
+
         
         # TODO: Mark the node as visited
+        expanded += 1 
+
         current.visited = True
 
         # Check if we reached our destination
@@ -106,7 +109,7 @@ def BFS(board, s_x, s_y, e_x, end_y):
 
             # TODO: append the child to our queue 
             queue.append(child)
-        expanded += 1
+       
     return 
 
 # Takes in a board, and starting x,y, and ending x,y respectively
@@ -123,7 +126,7 @@ def DFS(board, s_x, s_y, e_x, e_y):
 
         # TODO: Mark our node as visited
         current.visited = True
-
+        expanded += 1
         # Check if we are at the goal state
         if is_goal(current, e_x, e_y):
             print_path(current)
@@ -147,8 +150,9 @@ def DFS(board, s_x, s_y, e_x, e_y):
                 # TODO: Append the child node to our frontier 
                 frontier.append(child)
 
+
                 expanded += 1
-# TODO: Maybe add more algorithms later, such as A*, ID, DFS, etc...
+
 # The main function
 def main():
     # Print a greeting Message
@@ -180,7 +184,8 @@ def main():
         else:
             print('Sorry. I don\'t recognize this one.')
             
-        print(f'Expanded {exp} nodes using {algorithm}.')
+        print(f'\nExpanded {exp} nodes using {algorithm}.')
+        print_board(board)
     return 0
 
 # execute main function from the start
