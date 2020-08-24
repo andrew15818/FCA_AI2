@@ -79,12 +79,11 @@ def BFS(board, s_x, s_y, e_x, end_y):
     while queue:
         # TODO: Get the oldest node in our queue (closest to the root)
         current = queue.pop(0)
-
         
         # TODO: Mark the node as visited
-        expanded += 1 
-
         current.visited = True
+        expanded += 1 
+        
 
         # Check if we reached our destination
         if is_goal(current, e_x, end_y):
@@ -104,8 +103,7 @@ def BFS(board, s_x, s_y, e_x, end_y):
             
             child = board[child_x][child_y]
 
-            # Set the child as current's child 
-            current.child = child
+            # TODO: Set the current node as the child's parent node
             child.parent = current
 
             # TODO: append the child to our queue 
@@ -135,6 +133,7 @@ def DFS(board, s_x, s_y, e_x, e_y):
 
         # Loop through all the children
         for move in movements:
+            # TODO: get the coordinates of the children's moves
             child_x = current.x + move[0]
             child_y = current.y + move[1]
 
