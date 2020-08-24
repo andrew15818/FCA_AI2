@@ -53,8 +53,8 @@ def print_board(board):
         print("|\n")
 
 # Test if the node is the endpoint
-def is_goal(node, end_x, end_y):
-    if node.x == end_x and node.y == end_y:
+def is_goal(node, e_x, end_y):
+    if node.x == e_x and node.y == end_y:
         return True
     return False
 
@@ -69,21 +69,22 @@ def print_path(node):
     return
 
 # Breadth First Search
-def BFS(board, start_x, start_y, end_x, end_y):
+def BFS(board, s_x, s_y, e_x, end_y):
     expanded = 0 
-    # Store the nodes in the frontier
+    # TODO: Make our frontier and store the initial tile
     queue = []
-    queue.append(board[start_x][start_y])
+    queue.append(board[s_x][s_y])
 
     # Keep running until the queue is empty or reach end position
     while queue:
+        # TODO: Get the oldest node in our queue (closest to the root)
         current = queue.pop(0)
         
+        # TODO: Mark the node as visited
         current.visited = True
-        #print(f'Currently seeing {current.x}, {current.y}')
 
         # Check if we reached our destination
-        if is_goal(current, end_x, end_y):
+        if is_goal(current, e_x, end_y):
             print_path(current)
             return expanded
 
@@ -99,13 +100,16 @@ def BFS(board, start_x, start_y, end_x, end_y):
                 continue
             
             child = board[child_x][child_y]
-            child.parent = current # Try to record the children instead of the parents
+
+            # Set the child as current's child 
             current.child = child
-    
+
+            # TODO: append the child to our queue 
             queue.append(child)
         expanded += 1
     return 
 
+# Takes in a board, and starting x,y, and ending x,y respectively
 def DFS(board, s_x, s_y, e_x, e_y):
     # Keeping track of the nodes we expanded
     expanded = 0
@@ -114,8 +118,10 @@ def DFS(board, s_x, s_y, e_x, e_y):
     # TODO: append the initial node to our stack
     frontier.append(board[s_x][s_y])
     while frontier:
-        # TODO: get the node in our array we want to store
+        # TODO: Pop the node we want to explore
         current = frontier.pop()
+
+        # TODO: Mark our node as visited
         current.visited = True
 
         # Check if we are at the goal state
@@ -136,9 +142,11 @@ def DFS(board, s_x, s_y, e_x, e_y):
 
 
             if not child.visited:
-                child.visited = True
+                # TODO: Set the child node's parent to the current node
                 child.parent = current
+                # TODO: Append the child node to our frontier 
                 frontier.append(child)
+
                 expanded += 1
 # TODO: Maybe add more algorithms later, such as A*, ID, DFS, etc...
 # The main function
@@ -159,16 +167,16 @@ def main():
         
         # Get the start and end coordinates
         coords = input('Enter the starting coordinates: ').split()
-        start_x, start_y = int(coords[0]), int(coords[1])
+        s_x, s_y = int(coords[0]), int(coords[1])
 
         coords = input('Enter the ending coordinates: ').split()
-        end_x, end_y = int(coords[0]), int(coords[1])
+        e_x, end_y = int(coords[0]), int(coords[1])
         
         # Execute the indicated algorithm
         if algorithm == 'bfs':
-            exp = BFS(board, start_x, start_y, end_x, end_y)
+            exp = BFS(board, s_x, s_y, e_x, end_y)
         elif algorithm == 'dfs':
-            exp = DFS(board, start_x, start_y, end_x, end_y)
+            exp = DFS(board, s_x, s_y, e_x, end_y)
         else:
             print('Sorry. I don\'t recognize this one.')
             
