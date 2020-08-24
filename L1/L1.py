@@ -1,6 +1,6 @@
 from array import *
-import argparse
-
+import queue
+import math
 # Lesson 1 project
 # Change these two values to change the size of the board!
 BOARD_HEIGHT = 9
@@ -24,6 +24,9 @@ class Node:
         self.x = x
         self.y = y
         self.order = 0 # Print the order in which we explore the nodes
+        # For A* algorithm
+        self.f = 0 
+        self.g = 0
         
 def is_valid(x, y):
     if x < 0 or y < 0 or x >= BOARD_WIDTH or y >= BOARD_HEIGHT:
@@ -137,8 +140,6 @@ def DFS(board, s_x, s_y, e_x, e_y):
                 child.parent = current
                 frontier.append(child)
                 expanded += 1
-         
-
 # TODO: Maybe add more algorithms later, such as A*, ID, DFS, etc...
 # The main function
 def main():
@@ -149,8 +150,7 @@ def main():
             'Enter the name of the algorithm you want to use:\n'\
             '1. BFS\n'\
             '2. DFS\n'\
-            '3. A_STAR\n'\
-            '4. quit\n'
+            '3. quit\n'
             '------'
         )
         algorithm = input('').lower()
@@ -169,8 +169,6 @@ def main():
             exp = BFS(board, start_x, start_y, end_x, end_y)
         elif algorithm == 'dfs':
             exp = DFS(board, start_x, start_y, end_x, end_y)
-        elif algorithm == 'a_star':
-            print('chose a_star')
         else:
             print('Sorry. I don\'t recognize this one.')
             
