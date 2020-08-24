@@ -106,6 +106,7 @@ def BFS(board, s_x, s_y, e_x, end_y):
 
             # Set the child as current's child 
             current.child = child
+            child.parent = current
 
             # TODO: append the child to our queue 
             queue.append(child)
