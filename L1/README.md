@@ -36,7 +36,7 @@ For the time being, I have three algorithms we are going to test:
 Breadth-First Search tries to search all the nodes in a level of the search tree
 before moving on to the next level.
 The major steps in this algorithm go as follows:
-1. Create a queueused to keep the nodes we are to explore.
+1. Create a queue used to keep the nodes we are to explore.
 2. Append the initial position to the queue.
 3. Pop the oldest node in the list.
 4. Check if it is the goal.
