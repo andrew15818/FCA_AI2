@@ -48,7 +48,7 @@ def new_board():
 def print_board(board):
     for i in range(0, BOARD_WIDTH):
         for j in range(0, BOARD_HEIGHT):
-            print(f' {board[i][j].order} |', end='')
+            print("%2d"% (board[i][j].order))
         print('\n---|---|---|---|---|---|---|---|---|')
 
 # Test if the node is the endpoint
