@@ -1,6 +1,7 @@
 # Lesson 3 Project: N-Queens
-# TODO: Maybe to init the function, we can place a random queen on the last column
-BOARD_SIZE = 10
+import random
+
+BOARD_SIZE = 8
 Queens = BOARD_SIZE
 
 # Find way to print the board
@@ -15,6 +16,10 @@ def print_board(board):
 # Return a new board
 def new_board():
     board = [['*' for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
+
+    # Set a queen on random tile in first column to vary the solution
+    init_queen = random.randint(0, BOARD_SIZE)
+    board[init_queen][0] = 'Q'
     return board
 
 # Check if placing a queen here is feasible
@@ -66,9 +71,8 @@ def solve_board(board, col):
 
 # Main function of our program
 def main():
-    board = new_board()
-    solve_board(board, 0)
-
+    board = new_board() 
+    solve_board(board, 1)
     print_board(board)
 
 if __name__=='__main__':
