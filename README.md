@@ -10,3 +10,18 @@ then mark the nodes along the optimal path.
 
 The main idea is to compare different types of algorithms and when they would be 
 better/worse than other ones.
+
+## Lesson 2: Shortest paths
+
+## Lesson 3: 8-Queens
+In this lesson we learn about satisfiability and constraint satisfaction, which
+will influence our agents when making decisions. 
+
+The 8-queens (we could find a solution for n-queens on an nxn board) problem refers
+to finding a valid configuration of 8 queens on a chessboard such that none of them
+attack each other.
+
+One such configuration is
+![A symmetric solution](/img/Nqueens.png) 
+
+where the configuration happens to be symmetrical.
