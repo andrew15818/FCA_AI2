@@ -23,7 +23,36 @@ class Graph:
         self.graph[dst].append((dst, weight))
 
     # Here we implement Djikstra's algorithm
-    def shortest_path(src, dst):
+    def shortest_path(self, src, dst):
+
+        # Vertex queue
+        queue = []
+        # Distance to each vertex
+        distance = {}
+        # Parents of our nodes
+        parent = {}
+        for vertex in self.graph.keys():
+            distance[vertex] = float('inf')
+            parent[vertex] = None
+
+        distance[src] = 0
+        queue.append(src)
+
+        while queue:
+            current = queue.pop(0)
+            print(f'Examining {current}')
+
+            for edge in self.graph[current]:
+                neighbor = edge[0]
+                weight = edge[1]
+                # See if we can find a better path
+                tmp_dist = distance[current] + weight
+
+                # Adjust the new path if we find one
+                if tmp_dist < distance[neighbor]:
+                    distance[neighbor] = tmp_dist
+                    parent[neighbor] = current
+                    
 
 def main():
     print('-------\n'\
@@ -33,12 +62,16 @@ def main():
             '-------\n'
             )
     graph = Graph()
-    while True:
-        city = input('Enter name of city: ')
-
-        if city.lower() == 'continue':
-            break
+    graph.add_node('taipei')
+    graph.add_node('hsinchu')
+    graph.add_edge('taipei', 'hsinchu', 12)
+    graph.shortest_path('taipei', 'hsinchu')
+    '''
+    # Get the name of cities in our graph
+    cities = input('Enter the name of the cities in our map: ')
+    for city in cities.split():
         graph.add_node(city)
+
     print('-------\n'
             'Now enter the name of the source city, destination city, and weights\n'\
             'e.g Taipei Hsinchu 12\n'\
@@ -51,5 +84,7 @@ def main():
             break
 
     src, dst = input('Enter the city you wish to start and end at: ').split()
+    graph.shortest_path(src, dst)
+    '''
 if __name__=='__main__':
     main()
