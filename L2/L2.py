@@ -10,17 +10,17 @@ class Graph:
             self.graph[node] = []
 
     def add_edge(self, src, dst, weight):
-
+        
         if src not in self.graph:
-            print(f'{src} is not a node in our graph yet. Do add_node({src}) first')
-            return
-        elif dst not in self.graph:
-            print(f'{dst} is not a node in our graph yet. Do add_node({dst}) first')
-            return 
+            self.graph[src] = [] 
+        if dst not in self.graph: 
+            self.graph[dst] = []
 
-        # Store the node as a tuple
+
+        # Store the node as a tuple 
         self.graph[src].append((dst, weight))
-        self.graph[dst].append((dst, weight))
+        self.graph[dst].append((src, weight))
+        
 
     # Here we implement Djikstra's algorithm
     def shortest_path(self, src, dst):
@@ -65,49 +65,41 @@ class Graph:
         self.print_path(dst)
         print('\n')
 
+        return self.distance[dst]
 
                     
     def print_path(self, node):
         if node == None:
+            print('\nThe shortest path is: ', end=' ')
             return
         self.print_path(self.parent[node])
         print(f'{node} ', end=' ')
         
 
 def main():
-    print('-------\n'\
-            'Welcome! First, we will add the cities you want.\n'\
-            'Type the name of the city and press Enter.\n'\
-            'Type \'continue\' to move on to next stage.\n'\
-            '-------\n'
-            )
-    graph = Graph() 
-    # Get the name of cities in our graph
-    cities = input('Enter the name of the cities in our map: ')
-    for city in cities.split():
-        # TODO: Add the node to the graph
-        graph.add_node(city)
-
-    print('-------\n'
-            'Now enter the name of the source city, destination city, and weights\n'\
-            'e.g Taipei Hsinchu 12\n'\
-            '--------\n'
+    print('\n-------\n'
+        'Welcome, first we will add the edges in our graph\n'\
+        '-------\n'
         )
+    graph = Graph()
     while True:
-        src, dst, weight = input('Enter source, destination, weight: ').split() 
-        src = src.lower()
-        dst = dst.lower()
-        weight = int(weight)
-
-        # TODO: Add the edge between the source and destination with given weight
-        graph.add_edge(src, dst, weight)
-        
-        # break from the loop
-        if src.lower() == 'continue':
+        src = input('\nSource city: ').lower()
+        if src == 'continue':
+            break
+        dst = input('Destination city: ').lower()
+        if dst == 'continue':
             break
 
-    src, dst = input('Enter the city you wish to start and end at: ').split()
-    graph.shortest_path(src, dst)
-    
+        weight = int(input('Weight: '))
+
+        # TODO: add the edge between the two cities in our graph
+        graph.add_edge(src, dst, weight)
+    print('\nNow choose the cities to find the shortest path.')
+    src = input('Source city: ').lower()
+    dst = input('End city: ').lower()
+    # Calculate the shortest path
+    path = graph.shortest_path(src, dst)
+
+    print(f'\nThe shortest path between {src} and {dst} takes {path}.') 
 if __name__=='__main__':
     main()
