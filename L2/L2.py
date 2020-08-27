@@ -25,34 +25,54 @@ class Graph:
     # Here we implement Djikstra's algorithm
     def shortest_path(self, src, dst):
 
-        # Vertex queue
+        # TODO: Create vertex list 
         queue = []
-        # Distance to each vertex
-        distance = {}
-        # Parents of our nodes
-        parent = {}
+        # TODO: Make a dictionary containing the shortest distance to each city
+        self.distance = {}
+        # TODO: Store the parents of each node in a dictionary
+        self.parent = {}
+    
         for vertex in self.graph.keys():
-            distance[vertex] = float('inf')
-            parent[vertex] = None
+            # TODO: set all the distances to infinity
+            self.distance[vertex] = float('inf')
+            # TODO: set all the parents to None
+            self.parent[vertex] = None
+            # Add all the nodes to our initial list
+            queue.append(vertex)
 
-        distance[src] = 0
-        queue.append(src)
+        # TODO: set the distance to the initial node to 0
+        self.distance[src] = 0
+
 
         while queue:
+            # TODO: Pop the first node
             current = queue.pop(0)
-            print(f'Examining {current}')
+
 
             for edge in self.graph[current]:
                 neighbor = edge[0]
                 weight = edge[1]
-                # See if we can find a better path
-                tmp_dist = distance[current] + weight
+                # TODO: See if we can find a path to neighbor with lower cost
+                tmp_dist = self.distance[current] + weight
 
                 # Adjust the new path if we find one
-                if tmp_dist < distance[neighbor]:
-                    distance[neighbor] = tmp_dist
-                    parent[neighbor] = current
+                if tmp_dist < self.distance[neighbor]:
+                    # TODO: Set the distance to the neighbor to a lower value if we find one
+                    self.distance[neighbor] = tmp_dist
+                    # TODO: Set the parent of the neighbor to the current node
+                    self.parent[neighbor] = current
+
+        self.print_path(dst)
+        print('\n')
+
+
                     
+    def print_path(self, node):
+        if node == None:
+            return
+        self.print_path(self.parent[node])
+        print(f'{node} ', end=' ')
+        
 
 def main():
     print('-------\n'\
@@ -61,15 +81,11 @@ def main():
             'Type \'continue\' to move on to next stage.\n'\
             '-------\n'
             )
-    graph = Graph()
-    graph.add_node('taipei')
-    graph.add_node('hsinchu')
-    graph.add_edge('taipei', 'hsinchu', 12)
-    graph.shortest_path('taipei', 'hsinchu')
-    '''
+    graph = Graph() 
     # Get the name of cities in our graph
     cities = input('Enter the name of the cities in our map: ')
     for city in cities.split():
+        # TODO: Add the node to the graph
         graph.add_node(city)
 
     print('-------\n'
@@ -79,12 +95,19 @@ def main():
         )
     while True:
         src, dst, weight = input('Enter source, destination, weight: ').split() 
+        src = src.lower()
+        dst = dst.lower()
+        weight = int(weight)
+
+        # TODO: Add the edge between the source and destination with given weight
         graph.add_edge(src, dst, weight)
+        
+        # break from the loop
         if src.lower() == 'continue':
             break
 
     src, dst = input('Enter the city you wish to start and end at: ').split()
     graph.shortest_path(src, dst)
-    '''
+    
 if __name__=='__main__':
     main()
