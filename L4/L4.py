@@ -28,15 +28,18 @@ def edit_distance_naive(source, target, source_char, target_char):
                 edit_distance_naive(source, target, source_char, target_char-1),
                 edit_distance_naive(source, target, source_char-1, target_char-1)
             )
-
+# Store the temporary results in an array
 def edit_distance(source, target, source_char, target_char):
-    pass
+   sol = [[0] * len(source)] * len(target) 
+
+   print(sol)
 
 def main():
     input_strings = input('Enter the two strings separated by space: ').split()
     source = input_strings[0]
     target = input_strings[1]
-    print(edit_distance_naive(source, target, len(source)-1, len(target)-1))
+    #print(edit_distance_naive(source, target, len(source)-1, len(target)-1))
+    print(edit_distance(source, target, len(source)-1, len(target)-1))
     
 if __name__=='__main__':
     main()
