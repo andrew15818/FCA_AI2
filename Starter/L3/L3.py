@@ -18,8 +18,7 @@ def new_board():
     board = [['*' for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
 
     # Set a queen on random tile in first column to vary the solution
-    init_queen = random.randint(0, BOARD_SIZE)
-    board[init_queen][0] = 'Q'
+
     return board
 
 # Check if placing a queen here is feasible
@@ -31,19 +30,19 @@ def is_safe(board, row, col):
         3. The tiles on the lower left diagonal
     '''
     # Check the same row on left side
-    for i in range(col):
-        if board[row][i] == 'Q':
-            return False
+
+
+
 
     # Move along the upper left hand diagonal
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 'Q':
-            return False
+
+
+
 
     # Move along the lower left hand diagonal
-    for i, j in zip(range(row, BOARD_SIZE, 1), range(col, -1, -1)):
-        if board[i][j] == 'Q':
-            return False
+
+
+
 
     return True
 
@@ -56,16 +55,16 @@ def solve_board(board, col):
 
     # Find the spot on the column we can place the queen
     for i in range(0, BOARD_SIZE, 1):
-        if is_safe(board, i, col):
-            #print(f'\t{i}{col} is safe for a queen')
-            board[i][col] = 'Q'
+
             
-            # If we can place a queen here and solve the board, return True
-            if solve_board(board, col + 1):
-                return True
+
+            
+            # TODO: If we can place a queen here and solve the board, return True
+
+
         
-        # If we're here, it means we could not solve the board by placing a queen here
-        board[i][col] = '*'
+        # TODO: If we're here, it means we could not solve the board by placing a queen here
+
 
     return False
 

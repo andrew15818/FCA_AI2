@@ -11,7 +11,13 @@ then mark the nodes along the optimal path.
 The main idea is to compare different types of algorithms and when they would be 
 better/worse than other ones.
 
-## Lesson 2: Shortest paths
+## Lesson 2: Shortest route between ciites 
+Calcualting the shortest path to take between two cities is a very important task in modern GPS systems.
+In this project we learn about Dijkstra's algorithm for the shortest path in an unweighted graph, which is
+one of the most popular algorithms for such a task. 
+
+Since we also learn about graphs in this section, it would be useful to learn how exactly graphs are used in 
+Python.
 
 ## Lesson 3: 8-Queens
 In this lesson we learn about satisfiability and constraint satisfaction, which
