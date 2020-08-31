@@ -93,20 +93,21 @@ def main():
             'e.g Taipei Hsinchu 12\n'\
             '--------\n'
         )
-    while True:
-        src, dst, weight = input('Enter source, destination, weight: ').split() 
-        src = src.lower()
-        dst = dst.lower()
-        weight = int(weight)
 
-        # TODO: Add the edge between the source and destination with given weight
-        graph.add_edge(src, dst, weight)
-        
-        # break from the loop
-        if src.lower() == 'continue':
+    print('\nNow we\'ll enter the connections between the cities!\n')
+    while True:
+        src = input('\nSource city: ').lower()
+        if src == 'continue':
+            break
+        dst = input('Destination city: ').lower()
+        if dst == 'continue':
             break
 
-    src, dst = input('Enter the city you wish to start and end at: ').split()
+        weight = int(input('Weight: '))
+        # TODO: add the edge between the two cities to our graph
+        graph.add_edge(src, dst, weight)
+    
+    src, dst = input('\nEnter the city you wish to start and end at: ').split()
     graph.shortest_path(src, dst)
     
 if __name__=='__main__':
