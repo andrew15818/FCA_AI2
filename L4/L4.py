@@ -28,18 +28,42 @@ def edit_distance_naive(source, target, source_char, target_char):
                 edit_distance_naive(source, target, source_char, target_char-1),
                 edit_distance_naive(source, target, source_char-1, target_char-1)
             )
+
 # Store the temporary results in an array
-def edit_distance(source, target, source_char, target_char):
-   sol = [[0] * len(source)] * len(target) 
+def edit_distance(source, target):
+    sol = [[0 for i in range(len(source)+1)] for j in range(len(target)+1)]
 
-   print(sol)
+    sol[0][0] = 0
 
+    # If source string is empty, delete source_char characters
+    for i in range(1, len(source) + 1):
+        sol[0][i] = sol[0][i-1] + 1
+
+    # If source string is empty, also can insert target_char characters
+    for j in range(1, len(target) + 1):
+        sol[j][0] = sol[j-1][0] + 1
+
+    for i in range(1, len(target)+1):
+        for j in range(1, len(source)+1):
+
+            # If the two letters are the same, use the same answer
+            if source[j-1] == target[i-1]:
+                sol[i][j] = sol[i-1][j-1]
+
+            # Take the operation with minimum cost
+            else:
+                sol[i][j] = 1 + min(sol[i][j-1],
+                                    sol[i-1][j],
+                                    sol[i-1][j-1])
+    
 def main():
     input_strings = input('Enter the two strings separated by space: ').split()
     source = input_strings[0]
     target = input_strings[1]
     #print(edit_distance_naive(source, target, len(source)-1, len(target)-1))
-    print(edit_distance(source, target, len(source)-1, len(target)-1))
+
+
+    print(edit_distance(source, target))
     
 if __name__=='__main__':
     main()
