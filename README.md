@@ -16,7 +16,8 @@ Calcualting the shortest path to take between two cities is a very important tas
 In this project we learn about Dijkstra's algorithm for the shortest path in an unweighted graph, which is
 one of the most popular algorithms for such a task. 
 
-Since we also learn about graphs in this section, it would be useful to learn how exactly graphs are used in 
+Since we also learn about graphs in this section, it would be useful to learn 
+how exactly graphs are used in 
 Python.
 
 ## Lesson 3: 8-Queens
@@ -28,7 +29,7 @@ to finding a valid configuration of 8 queens on a chessboard such that none of t
 attack each other.
 
 One such configuration is
-![A symmetric solution](/img/Nqueens.png) 
+![A symmetric solution](/img/NQueens.png) 
 
 where the configuration happens to be symmetrical.
 
@@ -53,3 +54,21 @@ string into another?
 
 For example, to turn "horse" into "ros" we would need 3 operations. First, 
 we replace "h" with "r". Then, we remove the "r" and "e".
+
+## Lesson 5: Linear Regression
+
+This lesson focused on linear regression, or the process of finding a line that 
+best explains a pattern of data. We have many (x, y) points of data and we try and 
+find the slope and intercept that best draws a line y = mx + b through the rest of 
+the data.
+
+The main process we use to do this is called **gradient descent**. Gradient Descent 
+finds the direction in which the slope is changing at our current estimate, and we
+adjust our estimate in the direction of the (hopefully) global minimum.
+
+The next time we run the algorithm, our guess should give us a lower **error**, or
+it should match the data more closely.
+
+In this project, we have a group of data points that (roughly) follow a 
+pattern y = mx + b. We try to find this line by finding the appropriate slope and
+intercept to use.
