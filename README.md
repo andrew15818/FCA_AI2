@@ -29,6 +29,7 @@ to finding a valid configuration of 8 queens on a chessboard such that none of t
 attack each other.
 
 One such configuration is
+
 ![A symmetric solution](/img/NQueens.png) 
 
 where the configuration happens to be symmetrical.
