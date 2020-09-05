@@ -28,6 +28,28 @@ to finding a valid configuration of 8 queens on a chessboard such that none of t
 attack each other.
 
 One such configuration is
-![A symmetric solution](/img/Nqueens.png) 
+![A symmetric solution](img/Nqueens.png) 
 
 where the configuration happens to be symmetrical.
+
+## Lesson 4: Edit Distance
+Lesson 4 introduces the idea of greedy algorithms, and we see whether always
+taking the best decision at the moment ends up being the best decision in the 
+long term (The answer is no). 
+
+We also start touching on the idea of Dynamic Programming and how we could break
+down a problem recursively. This approach can be quite intuitive, although 
+it can have really high complexity unless we do something about it, like keep 
+track of the subproblems we already solved.
+
+For this lesson's project, we are going to do a personal favorite: Edit Distance.
+Suppose we have three operations available to us: 
+1. Insert a character
+2. Delete a character
+3. Replace a character
+
+Given two strings, what is the minimum number of operations we have to do to turn one
+string into another? 
+
+For example, to turn "horse" into "ros" we would need 3 operations. First, 
+we replace "h" with "r". Then, we remove the "r" and "e".
