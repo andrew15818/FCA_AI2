@@ -73,3 +73,10 @@ it should match the data more closely.
 In this project, we have a group of data points that (roughly) follow a 
 pattern y = mx + b. We try to find this line by finding the appropriate slope and
 intercept to use.
+
+The end result should look something like 
+
+![Final Regression](/img/Regression.png)
+
+The line is what we calculate for the training set, and we generalize it to an unseen 
+testing set, which is what this image shows.
