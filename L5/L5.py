@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 class LinearRegression():
     def __init__(self, learning_rate=0.001, batch_size=32, epochs=100):
         self.learning_rate =  learning_rate # Size of the step we take
-        self.batch_size = batch_size
-        self.epochs = epochs                    # Times we adjust our predictions
+        self.batch_size = batch_size        # See the data points in batch_sized chunks
+        self.epochs = epochs                # Times we adjust our predictions
 
     # Calculate the best line
     def fit(self, X, Y):
@@ -34,7 +34,7 @@ class LinearRegression():
                 # Update our guess for slope and intercept
                 self.slope = self.slope - self.learning_rate * slope_gradient
                 self.intercept = self.intercept - self.learning_rate * int_gradient
-        print(f'Our final guess for slope: {self.slope}\tintercept:{self.intercept}')
+                
 
 
     # Get the error between guess and actual values
