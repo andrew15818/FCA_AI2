@@ -30,9 +30,9 @@ attack each other.
 
 One such configuration is
 
-![A symmetric solution](/img/NQueens.png) 
+![A solution solution](/img/NQueens.png) 
 
-where the configuration happens to be symmetrical.
+
 
 ## Lesson 4: Edit Distance
 Lesson 4 introduces the idea of greedy algorithms, and we see whether always
