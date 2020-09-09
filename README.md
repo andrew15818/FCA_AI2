@@ -92,3 +92,12 @@ In this project, we use [openai](https://gym.openai.com)'s gym library. This lib
 provides many environments to test reinforcement learning. Gym is a great resource
 to learn more about algorithms and apply them to games.
 
+We are doing the CartPole project. In this project there is a bar attached to a 
+moving platform at the base  and the objective is to train our model to balance the
+rod. 
+
+![CartPole](/img/CartPole.png)
+
+We use Q-Learning, where we constantly upate a Q-Table which maps states to actions.
+We use the Q-Table to esitmate the total quality of each move in subsequent steps.
+Estimating the the Q-value for subsequent steps is done through multiple episodes.
