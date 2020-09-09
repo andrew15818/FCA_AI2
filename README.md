@@ -80,3 +80,15 @@ The end result should look something like
 
 The line is what we calculate for the training set, and we generalize it to an unseen 
 testing set, which is what this image shows.
+
+## Lesson 6: Training a game-playing agent
+
+Lesson 6 introduced supervised and reinforcement learning. The regression done in
+Lesson 5 is an example of supervised learning since during training we have access 
+to the labels of the training data. This might not be feasible in every scenario,
+since sometimes we might have to wait until we see the result of an action.
+
+In this project, we use [openai](https://gym.openai.com)'s gym library. This library
+provides many environments to test reinforcement learning. Gym is a great resource
+to learn more about algorithms and apply them to games.
+
