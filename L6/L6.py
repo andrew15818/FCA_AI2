@@ -46,10 +46,13 @@ def main():
     
     for ep in range(EPISODES):
         print(f'Episode: {ep}')
+
+        # Get the initial state
         observation = env.reset()
         # Turn continuous state space into discrete
         state = agent.discretize(observation)
-
+        
+        # Get Learning and Exploration rates
         alpha = agent.get_alpha(ep) 
         epsilon = agent.get_epsilon(ep)
 
