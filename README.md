@@ -101,3 +101,16 @@ rod.
 We use Q-Learning, where we constantly upate a Q-Table which maps states to actions.
 We use the Q-Table to esitmate the total quality of each move in subsequent steps.
 Estimating the the Q-value for subsequent steps is done through multiple episodes.
+
+## Lesson 7: Modeling the XOR function with a neural network 
+
+In this lesson we introduce and go over the idea and structure of a neural network.
+Neural networks are models based on the structure of the human brain. 
+
+The project in this lesson consists of training and testing the exclusive-or function
+(XOR). In this function, if the two inputs are either all true or all false, the 
+function's value is false. If one parameter is true and the other false, then the function
+is true.
+
+We use the sigmoid activation function and create a simple two-layer network which learns
+through backpropagation.
