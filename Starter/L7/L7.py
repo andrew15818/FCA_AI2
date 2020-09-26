@@ -10,14 +10,14 @@ def sigmoid_deriv(x):
 
 def forward(x, w1, w2, predict=False):
     # Multiply our test info with the input layer
-    a1 = np.matmul(x, w1) 
-    z1 = sigmoid(a1)
+
+
 
     # Create and add bias
-    bias = np.ones((len(z1), 1))
-    z1 = np.concatenate((bias, z1), axis=1)
-    a2 = np.matmul(z1, w2)
-    z2 = sigmoid(a2)
+
+
+
+
 
     if predict:
         return z2
@@ -56,18 +56,18 @@ m = len(X)
 for i in range(epochs):
     
     # Pass our input through the network
-    a1, z1, a2, z2 = forward(X, w1, w2)
+
 
     # Calculate the error with backpropagation
-    delta2, Delta1, Delta2 = backprop(a2, X, z1, z2, y)
+
 
     # Modify our weights
-    w1 -= LEARNING_RATE * (1 / m) * Delta1
-    w2 -= LEARNING_RATE * (1 / m) * Delta2
+
+
 
     # Add the costs
-    c = np.mean(np.abs(delta2))
-    costs.append(c)
+
+
 
     if i % 1000 == 0:
         print(f'iteration: {i} Error: {c}')
@@ -77,7 +77,7 @@ print('Training complete.')
 print('\nOriginal Input: ')
 print(X)
 # Make predictions
-z3 = forward(X, w1, w2, True)
+
 print('Percentages: ')
 print(z3)
 print('Predictions: ')
