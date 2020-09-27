@@ -114,3 +114,18 @@ is true.
 
 We use the sigmoid activation function and create a simple two-layer network which learns
 through backpropagation.
+
+## Lesson 8: Handwritten number classification
+
+Our project invovled the famous [MNIST](yann.lecun.com/exdb/mnist/), a database of thousands
+of handwritten numbers. We used the Keras library to create a neural network capable of 
+achieving a high accuracy rate. We also used [Google colab](https://colab.research.google.com)
+to use our code and not workky about any dependencies.
+
+We first load the dataset, and do some preprocessing such as normalizing the images. 
+Next, we create our model, which has one convolutional layer, a max-pooling layer, 
+and two dense layers at the end. 
+
+Our error and accuracy rates end up as follows:
+
+![Error](/img/Error.png)
