@@ -56,8 +56,7 @@ def solve_board(board, col):
 
     # Find the spot on the column we can place the queen
     for i in range(0, BOARD_SIZE, 1):
-        if is_safe(board, i, col):
-            #print(f'\t{i}{col} is safe for a queen')
+        if is_safe(board, i, col): 
             board[i][col] = 'Q'
             
             # If we can place a queen here and solve the board, return True
