@@ -25,6 +25,7 @@ class Node:
         self.x = x
         self.y = y
         self.order = 0 # Print the order in which we explore the nodes
+
         # For A* algorithm
         self.f = 0 
         self.g = 0
@@ -167,7 +168,7 @@ def main():
             '------'
         )
         algorithm = input('').lower()
-        if algorithm == 'quit':
+        if algorithm in ['q','quit']:
             exit()
         
         # Get the start and end coordinates
@@ -178,18 +179,17 @@ def main():
         e_x, end_y = int(coords[0]), int(coords[1])
         
         # Execute the indicated algorithm
-        try:
-            if algorithm == 'bfs' or algorithm == '1':
-                exp = BFS(board, s_x, s_y, e_x, end_y)
-            elif algorithm == 'dfs' or algorithm == '2':
-                exp = DFS(board, s_x, s_y, e_x, end_y)
-
-            print(f'\nExpanded {exp} nodes using {algorithm}.')     
-            print_board(board)
-        except:
+        if algorithm == 'bfs' or algorithm == '1':
+            exp = BFS(board, s_x, s_y, e_x, end_y)
+        elif algorithm == 'dfs' or algorithm == '2':
+            exp = DFS(board, s_x, s_y, e_x, end_y)
+        else:
             print('Format incorrect. Try \'bfs/dfs\' and the coordinates separated by a space.')
             continue
-       
+
+        print(f'\nExpanded {exp} nodes using {algorithm}.')     
+        print_board(board)
+                   
         
     return 0
 

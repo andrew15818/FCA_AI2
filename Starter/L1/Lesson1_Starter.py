@@ -166,7 +166,7 @@ def main():
             '------'
         )
         algorithm = input('').lower()
-        if algorithm == 'quit':
+        if algorithm in ['q', 'quit']:
             exit()
         
         # Get the start and end coordinates
@@ -177,12 +177,13 @@ def main():
         e_x, end_y = int(coords[0]), int(coords[1])
         
         # Execute the indicated algorithm
-        if algorithm == 'bfs':
+        if algorithm == 'bfs' or algorithm == '1':
             exp = BFS(board, s_x, s_y, e_x, end_y)
-        elif algorithm == 'dfs':
+        elif algorithm == 'dfs' or algorithm == '2':
             exp = DFS(board, s_x, s_y, e_x, end_y)
         else:
             print('Sorry. I don\'t recognize this one.')
+            continue
             
         print(f'\nExpanded {exp} nodes using {algorithm}.')
         print_board(board)
