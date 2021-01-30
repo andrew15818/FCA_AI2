@@ -10,6 +10,14 @@ will get us from start to end.
 We can try out different algorithms to see which one is the best, although 
 this might be too much for one lesson.
 
+## Running the code
+To run the code, from the cli type in
+```shell
+python L1.py
+```
+Then type `bfs` or `dfs` to choose the algorithm. The start and end coordinates
+should be space-separated, e.g. `1 0`.
+
 ## General approach 
 I would like to compare/contrast different approaches to searching for a solution
 using some of the methods we learned from AC260.
