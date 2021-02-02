@@ -7,7 +7,14 @@ they are spam.
 We use **Bayes' Theorem** to find the probability that an 
 email is spam given the words contained in that email.
 
-TODO:
-1. Find many spam emails [maybe from here?](https://archive.ics.uci.edu/ml/machine-learning-databases/00228)/
-2. Generate the dictionary for spam, hams
-3. Find the three probabilities required by Bayes.
+To simplify the math, we use the `sklearn` Naive Bayes classifier.
+Our main job is then to format the data correctly and just pass it 
+to our classifier.
+
+For this program, we only need to run it
+
+```python
+python L9.py
+```
+
+and you should see some output on the screen.
