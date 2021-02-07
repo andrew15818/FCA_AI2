@@ -14,3 +14,9 @@ another single node.
 We could also modify the problem to find the shortest node
 between one node and all the other nodes in our graph, or
 to find the distance between every pair of nodes as well.
+
+To run the program, we can just use 
+
+```python
+python L2.py
+```
