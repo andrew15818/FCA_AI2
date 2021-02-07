@@ -79,29 +79,43 @@ class Graph:
 def main():
     print('\n-------\n'
         'Welcome, first we will add the edges in our graph\n'\
+        'Input a source city, a target city, and the length between them.\n'
+        'To move to next stage, type \'continue\'. \n'\
         '-------\n'
-        )
-
-    graph = Graph()
+        )   
+    
     while True:
-        src = input('\nSource city: ').lower()
-        if src == 'continue':
+        graph = Graph()
+        while True:
+            src = input('\nSource city: ').lower()
+            if src == 'continue':
+                break
+            dst = input('Destination city: ').lower()
+            if dst == 'continue':
+                break
+
+            try:
+                weight = int(input('Weight: '))
+            except:
+                print('Remember that the weight should be an integer! Start over')
+                continue
+
+            # TODO: add the edge between the two cities in our graph
+            graph.add_edge(src, dst, weight)
+
+        print('\nNow choose the cities to find the shortest path.\n')
+        src = input('Source city: ').lower()
+        dst = input('End city: ').lower()
+
+        # Calculate the shortest path
+        path = graph.shortest_path(src, dst)
+
+        print(f'\nThe shortest path between {src} and {dst} takes {path}.') 
+
+        cont = input('Play again?[y/n]: ').lower()
+        if cont == 'n':
             break
-        dst = input('Destination city: ').lower()
-        if dst == 'continue':
-            break
-
-        weight = int(input('Weight: '))
-
-        # TODO: add the edge between the two cities in our graph
-        graph.add_edge(src, dst, weight)
-    print('\nNow choose the cities to find the shortest path.')
-    src = input('Source city: ').lower()
-    dst = input('End city: ').lower()
-    # Calculate the shortest path
-    path = graph.shortest_path(src, dst)
-
-    print(f'\nThe shortest path between {src} and {dst} takes {path}.') 
 
 if __name__=='__main__':
     main()
+
