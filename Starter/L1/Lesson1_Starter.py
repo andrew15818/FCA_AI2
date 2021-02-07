@@ -189,7 +189,6 @@ def heuristic_search(board, s_x, s_y, e_x, e_y):
             # TODO: Only explore nodes with a shorter distance
 
             if child.h < current.h:
-                print(f'Adding {child.x},{child.y}')
                 child.parent = current 
                 frontier.put((child.h, child))
                 expanded += 1
