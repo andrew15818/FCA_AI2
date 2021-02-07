@@ -129,3 +129,11 @@ and two dense layers at the end.
 Our error and accuracy rates end up as follows:
 
 ![Error](/img/Error.png)
+
+## Lesson 9: Spam Classifier
+In this method we quickly implement a small Bayes classifier on a set of messages to determine
+if they are spam or not. We use the `sklearn` Bayes classifier on a very small set of messages
+found [here](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection).
+
+We load the messages from a text file and after formatting them correctly, we just pass it to 
+our model, and do the same for the test data.
