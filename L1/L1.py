@@ -1,6 +1,7 @@
 from array import *
 import queue
 import math
+
 # Lesson 1 project
 # Change these two values to change the size of the board!
 BOARD_HEIGHT = 9
@@ -29,7 +30,9 @@ class Node:
         # For A* algorithm
         self.f = 0 
         self.g = 0
-        
+        self.h = 0
+    def __gt__(self, node):         
+        return (self.f >= node.f)
 def is_valid(x, y):
     if x < 0 or y < 0 or x >= BOARD_WIDTH or y >= BOARD_HEIGHT:
         return False
@@ -84,7 +87,7 @@ def BFS(board, s_x, s_y, e_x, end_y):
         
         # TODO: Mark the node as visited
         current.visited = True
-        expanded += 1 
+       
         
 
         # Check if we reached our destination
@@ -110,6 +113,7 @@ def BFS(board, s_x, s_y, e_x, end_y):
 
             # TODO: append the child to our queue 
             queue.append(child)
+        expanded += 1 
        
     return 
 
@@ -154,6 +158,49 @@ def DFS(board, s_x, s_y, e_x, e_y):
 
 
                 expanded += 1
+# "Guess" how much we have left to go
+def heuristic(x1, y1, x2, y2):
+    # Sum of rows and cols from one point to next
+    return (abs(x1 - x2) + abs(y1 - y2))
+
+# Choose the next unvisited node with the lowest heuristic
+def heuristic_search(board, s_x, s_y, e_x, e_y):
+    # PQueue will order nodes according to hueristic
+    frontier = queue.PriorityQueue()
+    expanded = 0
+    initial = board[s_x][s_y]
+    initial.h = heuristic(s_x, s_y, e_x, e_y)
+    frontier.put((initial.h, initial))
+
+    while not frontier.empty():
+        # Get the node with lowest heuristic
+        current = frontier.get()[1]
+        if is_goal(current, e_x, e_y):
+            print_path(current)
+            return expanded
+           
+        # TODO: Check the possible moves
+        for move in movements:
+            cx = current.x + move[0]
+            cy = current.y + move[1]
+
+            if not is_valid(cx, cy):
+                continue
+
+            child = board[cx][cy]
+
+            if child.visited:
+                continue
+            child.visited = True 
+            # TODO: Only explore nodes with a shorter distance
+            child.h = heuristic(child.x, child.y, e_x, e_y)
+            if child.h < current.h:
+                print(f'Adding {child.x},{child.y}')
+                child.parent = current 
+                frontier.put((child.h, child))
+                expanded += 1
+    return expanded
+
 
 # The main function
 def main():
@@ -164,25 +211,27 @@ def main():
             'Enter the name of the algorithm you want to use:\n'\
             '1. BFS\n'\
             '2. DFS\n'\
-            '3. quit\n'
+            '3. Heur\n'\
+            '4. quit\n'
             '------'
         )
-        algorithm = input('').lower()
+        algorithm = input('Enter name of algorithm: ').lower()
         if algorithm in ['q','quit']:
             exit()
-        
         # Get the start and end coordinates
         coords = input('Enter the starting coordinates: ').split()
         s_x, s_y = int(coords[0]), int(coords[1])
 
         coords = input('Enter the ending coordinates: ').split()
-        e_x, end_y = int(coords[0]), int(coords[1])
+        e_x, e_y = int(coords[0]), int(coords[1])
         
         # Execute the indicated algorithm
         if algorithm == 'bfs' or algorithm == '1':
-            exp = BFS(board, s_x, s_y, e_x, end_y)
+            exp = BFS(board, s_x, s_y, e_x, e_y)
         elif algorithm == 'dfs' or algorithm == '2':
-            exp = DFS(board, s_x, s_y, e_x, end_y)
+            exp = DFS(board, s_x, s_y, e_x, e_y)
+        elif algorithm == 'heur' or algorithm == '3':
+            exp = heuristic_search(board, s_x, s_y, e_x, e_y)
         else:
             print('Format incorrect. Try \'bfs/dfs\' and the coordinates separated by a space.')
             continue
