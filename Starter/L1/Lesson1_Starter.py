@@ -153,6 +153,46 @@ def DFS(board, s_x, s_y, e_x, e_y):
 
                 expanded += 1
 
+def heuristic(x1, y1, x2, y2):
+    # Sum of rows and cols from one point to next
+    pass
+
+# Choose the next unvisited node with the lowest heuristic
+def heuristic_search(board, s_x, s_y, e_x, e_y):
+    # PQueue will order nodes according to hueristic
+    frontier = queue.PriorityQueue()
+    expanded = 0
+    initial = board[s_x][s_y]
+    initial.h = heuristic(s_x, s_y, e_x, e_y)
+    frontier.put((initial.h, initial))
+
+    while not frontier.empty():
+        # Get the node with lowest heuristic
+        current = frontier.get()[1]
+        if is_goal(current, e_x, e_y):
+            print_path(current)
+            return expanded
+           
+        # TODO: Check the possible moves
+        for move in movements:
+         
+        
+
+            if not is_valid(cx, cy):
+                continue
+
+
+
+            if child.visited:
+                continue
+            child.visited = True 
+            # TODO: Only explore nodes with a shorter distance
+
+            if child.h < current.h:
+                child.parent = current 
+                frontier.put((child.h, child))
+                expanded += 1
+    return expanded
 # The main function
 def main():
     # Print a greeting Message
@@ -162,11 +202,12 @@ def main():
             'Enter the name of the algorithm you want to use:\n'\
             '1. BFS\n'\
             '2. DFS\n'\
-            '3. quit\n'
+            '3. Heur\n'\
+            '4. quit\n'
             '------'
         )
         algorithm = input('').lower()
-        if algorithm in ['q', 'quit']:
+        if algorithm in ['q', 'quit', '4']:
             exit()
         
         # Get the start and end coordinates
