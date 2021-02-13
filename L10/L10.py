@@ -4,7 +4,8 @@ import numpy as np
 base = 3                    # Rows and columns of board
 elems = base * base         # Total number of elements 
 squares = elems * elems
-empties = squares * 3 // 4# Number of empy elements
+#empties = squares * 1 // 20# Number of empy elements
+empties = 1
 
 def pattern(r, c):
     return (base*(r%base)+r//base+c)%elems
@@ -31,28 +32,32 @@ def create_board():
 # type refers to whether we check row/col or block
 def check_all_numbers(arr, type='1d'):
     # Check a 3x3 block
-    count = [None] * (elems + 1)
+    count = [0] * (elems + 1)
     if type == 'block':
-        # Code here
         for row in arr:
             for col in row:
-                if count[col] != None:
+                #print(f'Checking {col}')
+                if (count[col] != 0 
+                        or col == 0):
                     return False
                 else:
-                    count[col] = 1
+                    count[col] += 1
         return True
-    
+   
     for i in arr:
         # If a number is repeated
-        if count[i] != None:
+        if (count[i] != 0 
+                or i == 0):
+            #print(f'Problem with {i}')
             return False
+            
         else:
-            count[i] = 1
+            count[i] += 1
     return True
 
 
 def is_solved(board):
-    '''
+    
     # Check every row and column
     for i, row in enumerate(board):
         if not check_all_numbers(row):
@@ -61,35 +66,52 @@ def is_solved(board):
         col = board[:,i]
         if not check_all_numbers(col):
             return False
-    '''
+    
  
     # Check every subsquare
     for i in range(0, elems, base):
         for j in range(0, elems, base): 
             block = board[i:i+(base),j:j+(base)]
+            print(f'Subsquare starting at: {i},{j}')
             if not check_all_numbers(block, type='block'):
-                print(f'Subsquare starting at: {i},{j}')
+                print('Not all blocks are valid')
+    
                 return False
     # If we make it this far we know it's valid board
+    print('all blocks are valid')
     return True
+# Check if we can place num at location
+def is_valid(board, i, j, val):
+    pass
 # TODO: Execute the backtracking
 def solve(board):
     if is_solved(board):
-        return board 
+        print('Solved')
+        return False 
 
-    for row in range(len(board)):
-        for col in range(len(board[row])):
-            if board[row][col] == 0:
-                for i in range(elems):
+    (rows, cols) = board.shape
+    for row in range(rows):
+        for col in range(cols):
+            if board[row][col] == 0: 
+                for i in range(1, elems+1):
                     board[row][col] = i
-                    solve(board)
+                    print(f'\tSetting[{row}][{col}]= {i}')
+                    if not solve(board):
+                        continue
                     
 def main():
     board = create_board()
-    for row in board:
-        print(row)
-    
+    #board[1][0] = 0
     delete_random(board)
-    is_solved(board)
+    for row in board:
+        print(row)  
+    solve(board)
+    if not is_solved(board):
+        solve(board)
+    #is_solved(board)
+    print('==========')
+    for row in board:
+        print(row) 
+    
 if __name__=='__main__':
     main()
