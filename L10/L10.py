@@ -4,8 +4,7 @@ import numpy as np
 base = 3                    # Rows and columns of board
 elems = base * base         # Total number of elements 
 squares = elems * elems
-#empties = squares * 1 // 20# Number of empy elements
-empties = 1
+empties = 10  # Number of empty boxes
 
 def pattern(r, c):
     return (base*(r%base)+r//base+c)%elems
@@ -72,46 +71,52 @@ def is_solved(board):
     for i in range(0, elems, base):
         for j in range(0, elems, base): 
             block = board[i:i+(base),j:j+(base)]
-            print(f'Subsquare starting at: {i},{j}')
+            #print(f'Subsquare starting at: {i},{j}')
             if not check_all_numbers(block, type='block'):
-                print('Not all blocks are valid')
+                #print('Not all blocks are valid')
     
                 return False
     # If we make it this far we know it's valid board
-    print('all blocks are valid')
+    #print('all blocks are valid')
     return True
-# Check if we can place num at location
-def is_valid(board, i, j, val):
+
+# Nicely format the board
+def print_board(board):
+    rows, cols = board.shape
+    print('----------------------------------------------')
+    for row in range(rows):
+        for col in range(cols):
+            if col == 0:
+                print('| ', end='')
+            print('{:^2d} |'.format(board[row][col]), end=' ')
+        print('\n|----|----|----|----|----|----|----|----|----|')
+
     pass
-# TODO: Execute the backtracking
+
+
 def solve(board):
     if is_solved(board):
-        print('Solved')
-        return False 
+        #print('Solved')
+        return 
 
     (rows, cols) = board.shape
     for row in range(rows):
         for col in range(cols):
             if board[row][col] == 0: 
                 for i in range(1, elems+1):
-                    board[row][col] = i
-                    print(f'\tSetting[{row}][{col}]= {i}')
-                    if not solve(board):
-                        continue
+                    if (i not in board[row] 
+                            and i not in board[:,col]):
+                        board[row][col] = i
+                        solve(board) 
+    return 
                     
 def main():
     board = create_board()
-    #board[1][0] = 0
     delete_random(board)
-    for row in board:
-        print(row)  
+    print('====Initial Board====')
+    print_board(board)
+    print('====Solved Board====')
     solve(board)
-    if not is_solved(board):
-        solve(board)
-    #is_solved(board)
-    print('==========')
-    for row in board:
-        print(row) 
-    
+    print_board(board) 
 if __name__=='__main__':
     main()
